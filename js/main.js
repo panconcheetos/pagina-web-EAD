@@ -1,4 +1,4 @@
-// Interacciones ligeras: menú móvil + animaciones de entrada
+// Interacciones ligeras: menú móvil, animaciones de entrada
 const menuToggle = document.querySelector('.menu-toggle');
 const mobileNav = document.querySelector('.mobile-nav');
 
@@ -113,7 +113,7 @@ if (hero) {
   });
 }
 
-// Carrusel de cursos + modal de video
+// cursos y modal de video
 const coursesCarousel = document.querySelector('[data-carousel]');
 const videoModal = document.getElementById('course-video-modal');
 
