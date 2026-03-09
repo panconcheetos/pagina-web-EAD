@@ -132,10 +132,11 @@ a {
 
 .btn-header {
   border-radius: 999px;
-  padding: 12px 28px;
+  padding: 12px 34px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 0.9rem;
+  white-space: nowrap;
   background: #1a4164;
   color: #fff;
 }

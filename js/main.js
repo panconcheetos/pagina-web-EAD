@@ -218,8 +218,20 @@ if (coursesCarousel) {
 if (videoModal) {
   const videoPlayer = videoModal.querySelector('.video-modal__player');
   const videoSource = videoPlayer.querySelector('source');
+  const courseDescription = videoModal.querySelector('[data-course-description]');
   const closeTriggers = Array.from(videoModal.querySelectorAll('[data-modal-close]'));
   const mediaButtons = Array.from(document.querySelectorAll('.course-card .course-media'));
+
+  const courseDescriptions = {
+    'Ley Karin': 'Este proyecto busca reconocer el impacto de la Ley Karin y sus protocolos de prevención en la mitigación del acoso laboral en Chile, analizando sus objetivos, aplicación, vigencia y cambios principales que introduce la Ley.',
+    DS44: 'Este curso establece las bases para aplicar medidas de gestión preventiva de seguridad y salud en el trabajo (SST) en Chile, contextualizando el surgimiento del nuevo Decreto Supremo N° 44 (DS44), vigente desde el 1 de febrero de 2025.',
+    'Trabajo en equipo': 'Este curso busca que los participantes puedan adquirir herramientas colaborativas que promuevan el trabajo en equipo eficaz, la comunicación efectiva y diferentes estrategias en la resolución de conflictos; considerando planes de mejora continua.',
+    'Administración del tiempo laboral': 'La gestión del tiempo se refiere al conjunto de métodos diseñados para mejorar la eficiencia en la realización de tareas. En este curso, los participantes aprenderán estrategias clave para optimizar la productividad durante la jornada laboral.',
+    Excel: 'Esta serie de cursos presentan los conocimientos básicos, intermedios y/o avanzados del uso de Microsoft Excel. Cuentan con simuladores que buscan explicar el funcionamiento de las hojas de cálculo y todas sus posibilidades.',
+    'Primeros auxilios': 'El objetivo de este curso es reconocer el manejo efectivo de emergencias de obstrucción de la vía aérea por cuerpo extraño (OVACE) y paros cardiorrespiratorios (PCR), según protocolos de primeros auxilios.',
+    'Academia de ventas': 'Es un programa estructurado y diseñado para formar a los colaboradores de Construmart en habilidades de venta y atención al cliente, capaces de ofrecer asesoría experta y atención personalizada, generando satisfacción en los clientes.',
+    Mantención: 'Este curso realizado para Parques del Recuerdo ha sido diseñado para explicar los procesos de mantención que se llevan a cabo en sus locaciones; dando a conocer los lineamientos, buenas prácticas y estándares que guían su labor.'
+  };
 
   const closeModal = () => {
     videoModal.classList.remove('open');
@@ -228,12 +240,18 @@ if (videoModal) {
     videoPlayer.pause();
     videoPlayer.currentTime = 0;
     videoSource.src = '';
+    if (courseDescription) {
+      courseDescription.textContent = '';
+    }
     videoPlayer.load();
   };
 
   const openModal = (videoSrc, title) => {
     videoSource.src = videoSrc;
     videoPlayer.setAttribute('aria-label', `Video del curso ${title}`);
+    if (courseDescription) {
+      courseDescription.textContent = courseDescriptions[title] || '';
+    }
     videoPlayer.load();
     videoModal.classList.add('open');
     videoModal.setAttribute('aria-hidden', 'false');
