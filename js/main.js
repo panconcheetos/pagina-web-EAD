@@ -93,7 +93,7 @@ if ('IntersectionObserver' in window) {
   revealElements.forEach((element) => element.classList.add('is-visible'));
 }
 
-// Efecto fade-scroll del hero al desplazarse
+// Efecto del hero al desplazarse
 const hero = document.querySelector('.hero');
 if (hero) {
   window.addEventListener('scroll', () => {
@@ -110,7 +110,7 @@ if (hero) {
       hero.style.opacity = '';
       hero.style.transform = '';
     }
-  });
+  }, { passive: true });
 }
 
 // cursos y modal de video
@@ -233,6 +233,8 @@ if (videoModal) {
     Mantención: 'Este curso realizado para Parques del Recuerdo ha sido diseñado para explicar los procesos de mantención que se llevan a cabo en sus locaciones; dando a conocer los lineamientos, buenas prácticas y estándares que guían su labor.'
   };
 
+  let lastFocusedVideo = null;
+
   const closeModal = () => {
     videoModal.classList.remove('open');
     videoModal.setAttribute('aria-hidden', 'true');
@@ -244,9 +246,14 @@ if (videoModal) {
       courseDescription.textContent = '';
     }
     videoPlayer.load();
+    if (lastFocusedVideo) {
+      lastFocusedVideo.focus();
+      lastFocusedVideo = null;
+    }
   };
 
   const openModal = (videoSrc, title) => {
+    lastFocusedVideo = document.activeElement;
     videoSource.src = videoSrc;
     videoPlayer.setAttribute('aria-label', `Video del curso ${title}`);
     if (courseDescription) {
@@ -257,8 +264,12 @@ if (videoModal) {
     videoModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
     videoPlayer.play().catch(() => {
-      // La reproducción puede requerir interacción adicional según navegador.
+      // la reproducción automatica puede requerir interacción en algunos navegadores
     });
+    const closeBtn = videoModal.querySelector('.video-modal__close');
+    if (closeBtn) {
+      window.setTimeout(() => closeBtn.focus(), 40);
+    }
   };
 
   mediaButtons.forEach((button) => {
@@ -282,6 +293,151 @@ if (videoModal) {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && videoModal.classList.contains('open')) {
       closeModal();
+    }
+  });
+}
+
+// contacto
+const contactModal = document.getElementById('contact-modal');
+const contactOpenButtons = Array.from(document.querySelectorAll('[data-contact-open]'));
+
+if (contactModal && contactOpenButtons.length > 0) {
+  const contactCloseTriggers = Array.from(contactModal.querySelectorAll('[data-contact-close]'));
+  const contactForm = contactModal.querySelector('#contact-form');
+  const contactStatus = contactModal.querySelector('[data-contact-status]');
+  const contactSubmitButton = contactModal.querySelector('[data-contact-submit]');
+  const fieldNombre = contactForm.querySelector('[name="nombre"]');
+  const fieldEmpresa = contactForm.querySelector('[name="empresa"]');
+  const fieldEmail = contactForm.querySelector('[name="email"]');
+  const fieldTelefono = contactForm.querySelector('[name="telefono"]');
+  const fieldMensaje = contactForm.querySelector('[name="mensaje"]');
+  const contactFields = [fieldNombre, fieldEmpresa, fieldEmail, fieldTelefono, fieldMensaje];
+
+  const API_URL = '/api/contacto';
+
+  const setStatus = (message, type = '') => {
+    if (!contactStatus) {
+      return;
+    }
+    contactStatus.textContent = message;
+    contactStatus.classList.remove('is-error', 'is-success');
+    if (type) {
+      contactStatus.classList.add(type);
+    }
+  };
+
+  const clearValidation = () => {
+    contactFields.forEach((field) => {
+      field.removeAttribute('aria-invalid');
+    });
+  };
+
+  const validateContactForm = () => {
+    clearValidation();
+    let isValid = true;
+
+    contactFields.forEach((field) => {
+      if (!field.value.trim()) {
+        field.setAttribute('aria-invalid', 'true');
+        isValid = false;
+      }
+    });
+
+    const emailValue = fieldEmail.value.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailValue && !emailPattern.test(emailValue)) {
+      fieldEmail.setAttribute('aria-invalid', 'true');
+      isValid = false;
+    }
+
+    const telefonoValue = fieldTelefono.value.trim();
+    const telefonoPattern = /^[+\d\s-]+$/;
+    if (telefonoValue && !telefonoPattern.test(telefonoValue)) {
+      fieldTelefono.setAttribute('aria-invalid', 'true');
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  let lastFocusedContact = null;
+
+  const closeContactModal = () => {
+    contactModal.classList.remove('open');
+    contactModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('contact-modal-open');
+    if (lastFocusedContact) {
+      lastFocusedContact.focus();
+      lastFocusedContact = null;
+    }
+  };
+
+  const openContactModal = () => {
+    lastFocusedContact = document.activeElement;
+    setStatus('');
+    clearValidation();
+    contactModal.classList.add('open');
+    contactModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('contact-modal-open');
+    window.setTimeout(() => fieldNombre.focus(), 40);
+  };
+
+  contactOpenButtons.forEach((button) => {
+    button.addEventListener('click', openContactModal);
+  });
+
+  contactCloseTriggers.forEach((element) => {
+    element.addEventListener('click', closeContactModal);
+  });
+
+  contactFields.forEach((field) => {
+    field.addEventListener('input', () => {
+      field.removeAttribute('aria-invalid');
+      if (contactStatus.textContent) {
+        setStatus('');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && contactModal.classList.contains('open')) {
+      closeContactModal();
+    }
+  });
+
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!validateContactForm()) {
+      setStatus('Revisa los campos obligatorios y el formato del correo.', 'is-error');
+      return;
+    }
+
+    const originalButtonText = contactSubmitButton.textContent;
+    contactSubmitButton.disabled = true;
+    contactSubmitButton.textContent = 'Enviando...';
+    setStatus('Enviando tu solicitud...');
+
+    const formData = {
+      nombre: fieldNombre.value.trim(),
+      empresa: fieldEmpresa.value.trim(),
+      email: fieldEmail.value.trim(),
+      telefono: fieldTelefono.value.trim(),
+      mensaje: fieldMensaje.value.trim()
+    };
+
+    try {
+      // aqui se debe conectar el backend para procesar y almacenar los datos.
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+      setStatus('Solicitud enviada con éxito, te contactaremos pronto.', 'is-success');
+      contactForm.reset();
+    } catch (error) {
+      setStatus('No se pudo enviar la solicitud, intenta nuevamente.', 'is-error');
+    } finally {
+      contactSubmitButton.disabled = false;
+      contactSubmitButton.textContent = originalButtonText;
+      void API_URL;
+      void formData;
     }
   });
 }

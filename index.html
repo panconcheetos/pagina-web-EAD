@@ -47,7 +47,7 @@
     </script>
   </head>
   <body>
-    <!-- Header fijo -->
+   <!-- Header -->
     <header class="site-header" id="inicio">
       <div class="container header-inner">
         <a href="#inicio" class="logo" aria-label="Educación a Distancia inicio">
@@ -58,8 +58,8 @@
           <ul>
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#cursos">Cursos</a></li>
-            <li><a href="#clientes">Clientes</a></li>
             <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#clientes">Clientes</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </nav>
@@ -84,8 +84,8 @@
         <ul>
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#cursos">Cursos</a></li>
-          <li><a href="#clientes">Clientes</a></li>
           <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#clientes">Clientes</a></li>
           <li><a href="#contacto">Contacto</a></li>
           <li><a href="#contacto" class="btn btn-primary">Cotizar Capacitación</a></li>
           <li>
@@ -104,7 +104,7 @@
     </header>
 
     <main>
-      <!-- Hero -->
+    <!-- Hero -->
       <section class="hero">
         <div class="hero-split">
           <figure class="hero-visual" aria-label="Visual institucional">
@@ -118,7 +118,7 @@
               poster="assets/images/hero-left.jpeg"
             >
               <source src="assets/video/hero.mp4" type="video/mp4" />
-              
+              Tu navegador no es compatible con la reproducción de video HTML5.
             </video>
             <img src="assets/images/hero-left.jpeg" alt="Formación corporativa" class="hero-mobile-image" />
           </figure>
@@ -145,7 +145,7 @@
         </div>
       </section>
 
-      <!-- acceso rápido para alumnos inscritos -->
+      <!-- Acceso rápido para alumnos inscritos -->
       <section class="section-acceso reveal" aria-label="Acceso para alumnos inscritos">
         <div class="container">
           <div class="acceso-content">
@@ -160,7 +160,7 @@
         </div>
       </section>
 
-      <!-- Sección de presentación  -->
+      <!-- Presentación -->
       <section class="about-intro section-spacing" id="nosotros">
         <div class="container">
           <div class="about-grid">
@@ -202,7 +202,6 @@
         </div>
       </section>
 
-      <!-- Bloque -->
       <div class="about-cta-wrapper">
         <div class="container">
           <div class="about-cta reveal">
@@ -211,7 +210,7 @@
         </div>
       </div>
 
-      <!-- Sección de cursos-->
+       <!-- Seccion de cursos -->
       <section class="services section-spacing section-empty" id="cursos">
         <div class="container">
           <header class="section-heading courses-heading reveal" data-reveal-repeat>
@@ -310,29 +309,59 @@
       </section>
 
       <!-- Sección de clientes -->
-      <section class="clients section-spacing section-empty" id="clientes">
+      <section class="partners section-spacing" id="clientes">
         <div class="container">
-          <!-- Contenido pendiente: sección Clientes -->
+          <header class="partners-header reveal" data-reveal-repeat>
+            <span class="partners-kicker">NUESTROS CLIENTES</span>
+            <h2>Empresas que confían en nosotros</h2>
+            <p>Te mostramos algunos de los clientes que han adquirido nuestros servicios. Ya sea que busquen adquirir cursos de nuestro catálogo, colaborar para crear capacitaciones nuevas con su sello personal, o requieran de asesoría y apoyo en temas de LMS y SENCE, estas empresas están satisfechas con nuestra labor y desempeño; y seguimos trabajando juntos hasta la fecha.</p>
+          </header>
+
+          <ul class="partners-grid" data-reveal-stagger data-reveal-step="55" aria-label="Empresas clientes">
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo1.png" alt="Cliente 1" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo2.png" alt="Cliente 2" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo3.png" alt="Cliente 3" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo4.png" alt="Cliente 4" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo5.png" alt="Cliente 5" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo6.png" alt="Cliente 6" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo7.png" alt="Cliente 7" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo8.png" alt="Cliente 8" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo9.png" alt="Cliente 9" loading="lazy" />
+            </li>
+            <li class="partner-card reveal" data-reveal-repeat>
+              <img src="assets/clientes/logo10.png" alt="Cliente 10" loading="lazy" />
+            </li>
+          </ul>
         </div>
       </section>
 
-      <!-- Sección de resultados -->
-      <section class="results section-spacing section-empty" id="resultados">
-        <div class="container">
-          <!-- Contenido pendiente: sección Resultados -->
-        </div>
-      </section>
-
-      <!-- CTA final -->
+      <!-- Contacto -->
       <section class="final-cta section-spacing" id="contacto">
         <div class="container final-cta-content reveal">
           <h2>Impulsa el desarrollo de tu organización con formación estratégica.</h2>
-          <a href="mailto:contacto@educacionadistancia.cl" class="btn btn-light">Solicitar Información</a>
+          <button type="button" class="btn btn-light" data-contact-open>Solicitar Información</button>
         </div>
       </section>
     </main>
 
-    <!-- Footer  -->
+    <!-- footer -->
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
@@ -354,8 +383,8 @@
           <ul>
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#cursos">Cursos</a></li>
-            <li><a href="#clientes">Clientes</a></li>
             <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#clientes">Clientes</a></li>
           </ul>
         </div>
 
@@ -377,6 +406,52 @@
          
         </video>
         <div data-course-description class="hero-text" style="margin: 16px auto 18px; max-width: 62ch; text-align: justify; text-align-last: center;" aria-live="polite" aria-atomic="true"></div>
+      </div>
+    </div>
+
+    <div class="contact-modal" id="contact-modal" aria-hidden="true">
+      <div class="contact-modal__overlay" data-contact-close></div>
+      <div class="contact-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+        <button class="contact-modal__close" type="button" aria-label="Cerrar formulario" data-contact-close>&times;</button>
+
+        <div class="contact-modal__brand">
+          <img src="assets/images/logo-otec.png" alt="Educación a Distancia" loading="lazy" />
+        </div>
+
+        <h3 id="contact-modal-title">Solicitar información</h3>
+
+        <form id="contact-form" class="contact-form" action="/api/contacto" method="POST" novalidate>
+          <div class="contact-form__field">
+            <label for="contact-nombre">Nombre</label>
+            <input id="contact-nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+          </div>
+
+          <div class="contact-form__field">
+            <label for="contact-empresa">Empresa</label>
+            <input id="contact-empresa" name="empresa" type="text" placeholder="Nombre de tu empresa" required />
+          </div>
+
+          <div class="contact-form__field">
+            <label for="contact-email">Correo electrónico</label>
+            <input id="contact-email" name="email" type="email" placeholder="nombre@empresa.cl" required />
+          </div>
+
+          <div class="contact-form__field">
+            <label for="contact-telefono">Teléfono</label>
+            <input id="contact-telefono" name="telefono" type="tel" placeholder="+56 9 1234 5678" required />
+          </div>
+
+          <div class="contact-form__field">
+            <label for="contact-mensaje">Mensaje</label>
+            <textarea id="contact-mensaje" name="mensaje" rows="4" placeholder="Cuéntanos qué necesitas para tu organización" required></textarea>
+          </div>
+
+          <p class="contact-form__status" data-contact-status aria-live="polite"></p>
+
+          <button type="submit" class="btn btn-primary contact-form__submit" data-contact-submit>
+            Enviar solicitud
+          </button>
+        </form>
       </div>
     </div>
 
