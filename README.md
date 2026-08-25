@@ -7,7 +7,6 @@
 No se utilizaron librerias externas ni frameworks
 
 ## Estructura del proyecto
-Archivos :
 - "index.html": estructura completa de la landing, secciones, navegacion, modales y metadatos
 - "css/styles.css": estilos globales, componentes, layout responsive, animaciones y estilos de modales
 - "js/main.js": interacciones de UI (menú movil, scroll suave, reveal, carrusel, modales y validaciones)

@@ -16,7 +16,11 @@ if (menuToggle && mobileNav) {
   });
 }
 
+<<<<<<< HEAD
 // header fijo
+=======
+// Scroll suave con compensación de header fijo
+>>>>>>> b994fdefa5b7daa67526f74cbb3e6a32a47224b4
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
 
 anchorLinks.forEach((link) => {
@@ -53,7 +57,11 @@ anchorLinks.forEach((link) => {
   });
 });
 
+<<<<<<< HEAD
 // Sistema unificado de animaciones 
+=======
+// Sistema unificado de animaciones reveal
+>>>>>>> b994fdefa5b7daa67526f74cbb3e6a32a47224b4
 const revealElements = document.querySelectorAll('.reveal');
 const staggerGroups = document.querySelectorAll('[data-reveal-stagger]');
 
